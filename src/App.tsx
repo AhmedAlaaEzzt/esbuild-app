@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 const App = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(`const App =()=> <div>hi there!</div>`);
   const [code, setCode] = useState('');
   const ref = useRef<any>()
 
@@ -23,6 +23,7 @@ const App = () => {
   }, [])
 
 
+
   const onClick = () => {
     if (!ref.current) return;
 
@@ -31,11 +32,11 @@ const App = () => {
 
   return (
     <div>
-      <textarea value={input} onChange={e => setInput(e.target.value)}></textarea>
+      <textarea style={{width:800, height:200, fontSize: 33}} value={input} onChange={e => setInput(e.target.value)}></textarea>
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <pre>{code}</pre>
+      <pre style={{fontSize: 33}}>{code}</pre>
     </div>
   );
 }
