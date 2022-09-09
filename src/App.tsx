@@ -2,6 +2,7 @@ import * as esbuild from 'esbuild-wasm';
 
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 
 const App = () => {
   const [input, setInput] = useState(`const App =()=> <div>hi there!</div>`);
@@ -36,6 +37,7 @@ const App = () => {
       entryPoints: ['index.js'],
       bundle: true,
       write: false,
+      plugins: [unpkgPathPlugin()]
     })
 
 
