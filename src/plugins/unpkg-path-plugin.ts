@@ -6,6 +6,13 @@ export const unpkgPathPlugin = () => {
     setup(build: esbuild.PluginBuild) {
       console.log("setup function @@");
       console.log("build", build);
+
+      build.onResolve({ filter: /.*/ }, async (args: any) => {
+        console.log("onResolve", args);
+        return { path: args.path, namespace: "a" };
+      });
+
+      
     },
   };
 };
