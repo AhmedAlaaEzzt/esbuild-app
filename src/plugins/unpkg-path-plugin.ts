@@ -12,7 +12,20 @@ export const unpkgPathPlugin = () => {
         return { path: args.path, namespace: "a" };
       });
 
+
+
       
     },
   };
 };
+
+
+
+/**
+ * index.js
+ * import message from './message';
+ * console.log(message);
+ * 
+ * massage.js
+ * export default "hi there!"
+ */
