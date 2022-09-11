@@ -18,7 +18,7 @@ export const unpkgPathPlugin = () => {
       });
 
       build.onLoad({ filter: /.*/ }, async (args: any) => {
-        //console.log("onLoad", args);
+        console.log("onLoad", args);
 
         if (args.path === "index.js") {
           return {
