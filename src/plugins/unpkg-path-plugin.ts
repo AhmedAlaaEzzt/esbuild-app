@@ -4,8 +4,6 @@ export const unpkgPathPlugin = () => {
   return {
     name: "unpkg-path-plugin",
     setup(build: esbuild.PluginBuild) {
-      console.log("setup function @@");
-      console.log("build", build);
 
       build.onResolve({ filter: /.*/ }, async (args: any) => {
         console.log("onResolve", args);
@@ -19,7 +17,7 @@ export const unpkgPathPlugin = () => {
           return {
             loader: "jsx",
             contents: `
-              import message from 'tiny-test-pkg';
+              const message = require('tiny-test-pkg')';
               console.log(message);
             `,
           };
