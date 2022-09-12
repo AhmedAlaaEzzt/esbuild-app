@@ -10,11 +10,17 @@ export const unpkgPathPlugin = () => {
 
         if (args.path === "index.js")
           return { path: args.path, namespace: "a" };
-        else
+
+        if (args.path.includes("./"))
           return {
-            path: `https://unpkg.com/${args.path}`,
+            path: new URL(args.path, `${args.importer}/`).href,
             namespace: "a",
           };
+
+        return {
+          path: `https://unpkg.com/${args.path}`,
+          namespace: "a",
+        };
       });
 
       build.onLoad({ filter: /.*/ }, async (args: any) => {
