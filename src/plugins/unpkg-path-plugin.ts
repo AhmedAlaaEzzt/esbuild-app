@@ -13,7 +13,7 @@ export const unpkgPathPlugin = () => {
 
         if (args.path.includes("./"))
           return {
-            path: new URL(args.path, `${args.importer}/`).href,
+            path: new URL(args.path, `https://unpkg.com${args.resolveDir}/`).href,
             namespace: "a",
           };
 
@@ -36,11 +36,16 @@ export const unpkgPathPlugin = () => {
           };
         }
 
-        const { data } = await axios.get(args.path);
+        const { data, request } = await axios.get(args.path);
+        console.log("request", request);
+        console.log("responseURL", request.responseURL); // https://unpkg.com/nested-test-pkg@1.0.0/src/index.js
+        console.log("pathname", new URL(request.responseURL).pathname); // /nested-test-pkg@1.0.0/src/index.js
+        console.log("current dir", new URL("./", request.responseURL).pathname); // /nested-test-pkg@1.0.0/src/
 
         return {
           loader: "jsx",
           contents: data,
+          resolveDir: new URL('./',request.responseURL).pathname
         };
       });
     },
